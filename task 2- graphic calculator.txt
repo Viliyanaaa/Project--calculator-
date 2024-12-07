@@ -1,0 +1,236 @@
+task 2- graphic calculator
+
+import tkinter as tk
+import math
+
+
+def button_press(num):
+    global calculation
+    calculation = calculation + str(num)
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, calculation)
+
+
+def equals():
+    global calculation
+    calculation = str(eval(calculation))
+    if "/0" in calculation:
+        text_result.insert(1.0, "Error")
+    else:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, calculation)
+
+
+def square():
+    global calculation
+    calculation = math.pow(float(calculation), 2)
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, str(float(calculation)))
+
+
+def square_root():
+    global calculation
+    try:
+        calculation = math.sqrt(float(calculation))
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, str(float(calculation)))
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def all_clear():
+    global calculation
+    calculation = " "
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, calculation)
+
+
+def sinus():
+    global calculation
+    calculation = math.sin(float(calculation))
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, str(float(calculation)))
+
+
+def cosinus():
+    global calculation
+    calculation = math.cos(float(calculation))
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, str(float(calculation)))
+
+
+def tangens():
+    global calculation
+    try:
+        calculation = math.tan(float(calculation))
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, str(float(calculation)))
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def cotangens():
+    global calculation
+    try:
+        calculation = math.cos(float(calculation)) / math.sin(float(calculation))
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, str(float(calculation)))
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def degrees():
+    global calculation
+    try:
+        angle = float(calculation)
+        result = (angle * 180) / 3.14
+        calculation = str(result)
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, calculation)
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def radians():
+    global calculation
+    try:
+        angle = float(calculation)
+        result = (angle * 3.14) / 180.0
+        calculation = str(result)
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, calculation)
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def memory_safe(number):
+    global memory
+    new_memory = number
+    memory = new_memory
+
+
+def memory_add():
+    global memory, calculation
+    try:
+        calculation = str(float(calculation) + memory)
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, calculation)
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def memory_subtract():
+    global memory, calculation
+    try:
+        calculation = str(float(calculation) - memory)
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, calculation)
+    except ValueError:
+        text_result.delete(1.0, "end")
+        text_result.insert(1.0, "Error")
+
+
+def memory_read():
+    global memory
+    return memory
+
+
+def memory_read_handler():
+    global calculation
+    calculation = str(memory_read()) + " "
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, calculation)
+
+
+def memory_clear():
+    global memory
+    memory = 0
+
+
+root = tk.Tk()
+root.geometry("500x500")
+root.title("Graphic calculator")
+
+text_result = tk.Text(root, height=2, width=16, font=24)
+text_result.grid(columnspan=5)
+calculation = " "
+memory = 0
+
+
+button1 = tk.Button(root, text="1", height=1, width=3, font=14, command=lambda: button_press(1))
+button1.grid(row=2, column=0)
+button2 = tk.Button(root, text="2", height=1, width=3, font=14, command=lambda: button_press(2))
+button2.grid(row=2, column=1)
+button3 = tk.Button(root, text="3", height=1, width=3, font=14, command=lambda: button_press(3))
+button3.grid(row=2, column=2)
+button4 = tk.Button(root, text="4", height=1, width=3, font=14, command=lambda: button_press(4))
+button4.grid(row=3, column=0)
+button5 = tk.Button(root, text="5", height=1, width=3, font=14, command=lambda: button_press(5))
+button5.grid(row=3, column=1)
+button6 = tk.Button(root, text="6", height=1, width=3, font=14, command=lambda: button_press(6))
+button6.grid(row=3, column=2)
+button7 = tk.Button(root, text="7", height=1, width=3, font=14, command=lambda: button_press(7))
+button7.grid(row=4, column=0)
+button8 = tk.Button(root, text="8", height=1, width=3, font=14, command=lambda: button_press(8))
+button8.grid(row=4, column=1)
+button9 = tk.Button(root, text="9", height=1, width=3, font=14, command=lambda: button_press(9))
+button9.grid(row=4, column=2)
+button0 = tk.Button(root, text="0", height=1, width=3, font=14, command=lambda: button_press(0))
+button0.grid(row=5, column=1)
+
+button_plus = tk.Button(root, text="+", height=1, width=3, font=14, command=lambda: button_press("+"))
+button_plus.grid(row=2, column=3)
+button_minus = tk.Button(root, text="-", height=1, width=3, font=14, command=lambda: button_press("-"))
+button_minus.grid(row=3, column=3)
+button_multiply = tk.Button(root, text="*", height=1, width=3, font=14, command=lambda: button_press("*"))
+button_multiply.grid(row=4, column=3)
+button_divide = tk.Button(root, text="%", height=1, width=3, font=14, command=lambda: button_press("/"))
+button_divide.grid(row=5, column=3)
+button_decimal = tk.Button(root, text=".", height=1, width=3, font=14, command=lambda: button_press("."))
+button_decimal.grid(row=5, column=2)
+
+button_equals = tk.Button(root, text="=", height=1, width=3, font=14, command=lambda: equals())
+button_equals.grid(row=6, column=0)
+
+button_square = tk.Button(root, text="²", height=1, width=3, font=14, command=lambda: square())
+button_square.grid(row=6, column=1)
+button_root = tk.Button(root, text="√", height=1, width=3, font=14, command=lambda: square_root())
+button_root.grid(row=6, column=2)
+
+button_ms = tk.Button(root, text="MS", height=1, width=3, font=14, command=lambda: memory_safe(calculation))
+button_ms.grid(row=1, column=0)
+button_madd = tk.Button(root, text="M+", height=1, width=3, font=14, command=lambda: memory_add())
+button_madd.grid(row=1, column=1)
+button_msub = tk.Button(root, text="M-", height=1, width=3, font=14, command=lambda: memory_subtract())
+button_msub.grid(row=1, column=2)
+button_mr = tk.Button(root, text="MR", height=1, width=3, font=14, command=lambda: memory_read_handler())
+button_mr.grid(row=1, column=3)
+button_mc = tk.Button(root, text="MC", height=1, width=3, font=14, command=lambda: memory_clear())
+button_mc.grid(row=1, column=4)
+
+button_ac = tk.Button(root, text="AC", height=1, width=3, font=14, command=lambda: all_clear())
+button_ac.grid(row=5, column=0)
+
+button_sin = tk.Button(root, text="sin", height=1, width=3, font=14, command=lambda: sinus())
+button_sin.grid(row=2, column=4)
+button_cos = tk.Button(root, text="cos", height=1, width=3, font=14, command=lambda: cosinus())
+button_cos.grid(row=3, column=4)
+button_tan = tk.Button(root, text="tan", height=1, width=3, font=14, command=lambda: tangens())
+button_tan.grid(row=4, column=4)
+button_cotan = tk.Button(root, text="cotan", height=1, width=3, font=14, command=lambda: cotangens())
+button_cotan.grid(row=5, column=4)
+
+button_rad = tk.Button(root, text="rad", height=1, width=3, font=14, command=lambda: radians())
+button_rad.grid(row=6, column=4)
+button_deg = tk.Button(root, text="deg", height=1, width=3, font=14, command=lambda: degrees())
+button_deg.grid(row=6, column=3)
+
+
+root.mainloop()
+
