@@ -15,7 +15,7 @@ def quadratwurzel(x):
     if x <= 0:
         return "error"
     else:
-        return x ** 0.5 # **- повдигане на степен
+        return x ** 0.5 
 def bruch(x):
     if x == 0:
         return "error"
@@ -43,10 +43,8 @@ print("14.Stop")
 
 memory = 0
 ms = 0
-memory_stateful = 0 #=1- използва стойността, която е запаметена за следващата операция
-                    #=0- въвеждаме нова стойност за следващата операция
-operation_sequence = 0 #=1- използваме съхранената памет за дадената операция; първа операция след извикване на паметта
-                    #=0- не използваме съхранената памет за дадената операция; не е първа операция след извикване на паметта
+memory_stateful = 0 
+operation_sequence = 0
 operator = input("choose an operator between 1 and 14: ")
 
 while operator != 14:
