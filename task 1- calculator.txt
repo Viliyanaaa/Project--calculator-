@@ -1,0 +1,146 @@
+import math
+
+def addition(x, y):
+    return x + y
+def subtraktion(x, y):
+    return x - y
+def multiplikation(x, y):
+    return x * y
+def division(x, y):
+    if x / y == 0:
+        return "error"
+    else:
+        return x / y
+def quadratwurzel(x):
+    if x <= 0:
+        return "error"
+    else:
+        return x ** 0.5 # **- повдигане на степен
+def bruch(x):
+    if x == 0:
+        return "error"
+    else:
+        return 1 / x
+def prozent(x):
+    return x / 100
+
+
+print("select an operation:")
+print("1.Addition")
+print("2.Subtraktion")
+print("3.Multiplikation")
+print("4.Division")
+print("5.Quadratwurzel")
+print("6.Bruch")
+print("7.Prozent")
+print("8.Memory safe")
+print("9.Memory read")
+print("10.Memory add")
+print("11.Memory subtract")
+print("12.AC")
+print("13.Memory clear")
+print("14.Stop")
+
+memory = 0
+ms = 0
+memory_stateful = 0 #=1- използва стойността, която е запаметена за следващата операция
+                    #=0- въвеждаме нова стойност за следващата операция
+operation_sequence = 0 #=1- използваме съхранената памет за дадената операция; първа операция след извикване на паметта
+                    #=0- не използваме съхранената памет за дадената операция; не е първа операция след извикване на паметта
+operator = input("choose an operator between 1 and 14: ")
+
+while operator != 14:
+    
+    if operator in ['1','2','3','4','5','6','7','8','9','10','11','12','13']:
+
+        if operator == '1':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            number2 = float(input("Enter another number:"))
+            result = number1 + number2
+            print(result)
+            memory = result
+        elif operator == '2':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            number2 = float(input("Enter another number:"))
+            result = number1 - number2
+            print(result)
+            memory = result
+        elif operator == '3':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            number2 = float(input("Enter another number:"))
+            result = number1 * number2
+            print(result)
+            memory = result
+        elif operator == '4':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            number2 = float(input("Enter another number:"))
+            result = number1 / number2
+            print(result)
+            memory = result
+        elif operator == '5':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            result = math.sqrt(number1)
+            print(result)
+            memory = result
+        elif operator == '6':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            result = 1 / number1
+            print(result)
+            memory = result
+        elif operator == '7':
+            if memory_stateful == 0 and operation_sequence == 0:
+                number1 = float(input("Enter a number:"))
+            else:
+                number1 = memory
+            result = number1 / 100
+            print(result)
+            memory = result
+        elif operator == '8':
+            ms = memory
+        elif operator == '9':
+            print(ms)
+            memory=ms
+        elif operator == '10':
+            print("result=", addition(memory,ms))
+            memory = memory + ms
+        elif operator == '11':
+            print("result=", subtraktion(memory,ms))
+            memory = memory - ms
+        elif operator == '12':
+            memory = 0
+        elif operator == '13':
+            ms = 0
+    elif operator == '14':
+            break
+    else:
+        print("error")
+
+    if operator == '9':
+        memory_stateful = 1
+        operator = input("Enter an operator between 1 and 12:")
+    elif operator == '12':
+        memory_stateful = 0
+        operation_sequence = 0
+        operator = input("Enter an operator between 1 and 12:")
+    else:
+        operation_sequence = 1
+        number1 = memory
+        operator = input("Enter an operator between 1 and 12:")
